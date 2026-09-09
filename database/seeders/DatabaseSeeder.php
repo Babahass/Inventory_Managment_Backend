@@ -7,16 +7,34 @@ use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+      // 1. Create Default Admin User
         User::firstOrCreate(
             ['email' => 'admin@inventory.com'],
-            ['name' => 'Admin', 'password' => bcrypt('password')]
+            [
+                'name'      => 'Admin User',
+                'password'  => Hash::make('password123'), // Change this in production!
+                'role'      => 'admin',
+                'is_active' => true,
+            ]
         );
 
+        // 2. Create Default Staff User
+        User::firstOrCreate(
+            ['email' => 'staff@inventory.com'],
+            [
+                'name'      => 'Staff User',
+                'password'  => Hash::make('password123'),
+                'role'      => 'staff',
+                'is_active' => true,
+            ]
+        );
+    
         $categories = ['Electronics', 'Office Supplies', 'Furniture', 'Clothing', 'Food & Beverage'];
         foreach ($categories as $cat) {
             Category::firstOrCreate(['name' => $cat]);

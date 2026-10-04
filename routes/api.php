@@ -88,7 +88,22 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/reports', [ReportController::class, 'index']);
     });
 });
+use Illuminate\Support\Facades\DB;
 
+Route::get('/db-check', function () {
+    try {
+        DB::connection()->getPdo();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Successfully connected to Aiven MySQL with SSL!',
+        ], 200);
+    } catch (\Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'error_message' => $e->getMessage(),
+        ], 500);
+    }
+});
 
 // <?php
 

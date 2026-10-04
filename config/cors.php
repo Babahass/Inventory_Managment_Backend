@@ -11,7 +11,7 @@ return [
     'allowed_origins' => [
         'http://localhost:3000',
         'http://127.0.0.1:3000',
-        'https://inventory-managment-frontend-nu.vercel.app/'
+        'https://inventory-managment-frontend-nu.vercel.app'
         // Add your exact production Vercel domain here (without trailing slash):
         // 'https://your-app-name.vercel.app',
     ],
